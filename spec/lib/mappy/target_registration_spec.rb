@@ -22,7 +22,7 @@ module Mappy
       end
 
       it 'should retrieve the map and call it' do
-        Mappy.should_receive(:type).with(source).and_return(source_type)
+        Mappy.should_receive(:to_type).with(source).and_return(source_type)
         map.should_receive(:call).with(source_type, source)
         subject.call(source, target_name)
       end

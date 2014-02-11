@@ -19,5 +19,15 @@ module Mappy
         expect( subject.to_target(target_name) ).to eq(subject)
       end
     end
+
+    context '#map' do
+      let(:mapper) { double("Mapper") }
+      let(:target) { double("Target") }
+      let(:source) { double("Source") }
+      it 'should call the mapper' do
+        mapper.should_receive(:call).with(source, target).and_return(:response)
+        expect(subject.map(source, to: target, mapper: mapper)).to eq(:response)
+      end
+    end
   end
 end

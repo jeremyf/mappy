@@ -14,7 +14,7 @@ module Mappy
     end
 
     def call(source_instance, target)
-      source_type = Mappy.type(source_instance)
+      source_type = Mappy.to_type(source_instance)
       source_set.fetch(source_type).call(source_type, source_instance)
     end
 
