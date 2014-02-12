@@ -12,10 +12,14 @@ describe Mappy do
   context '.map' do
     before(:each) do
       Mappy.configure do |config|
-        config.legend(source: :journal, target: 'orcid/work') do |map|
-          map << [:title, :title]
-          map << [lambda{|*|'long-journal'}, :work_type]
-        end
+        config.legend(
+          source: :journal,
+          target: 'orcid/work',
+          legend: [
+            [:title, :title],
+            [lambda{|*|'long-journal'}, :work_type]
+          ]
+        )
       end
     end
     after(:each) do
