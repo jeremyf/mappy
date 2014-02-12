@@ -18,7 +18,7 @@ module Mappy
     def map(source_instance, options = {})
       source = source_instance.to_mappy_type
       target = options.fetch(:target)
-      target_builder_finder = options.fetch(:target_builder_finder) { lambda {|t| OpenStruct.method(:new) }}
+      target_builder_finder = options.fetch(:target_builder_finder) { lambda {|t| OpenStruct }}
       legend = map_store.fetch(target).fetch(source)
 
       target_builder = target_builder_finder.call(target)

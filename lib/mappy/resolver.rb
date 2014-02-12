@@ -14,7 +14,7 @@ module Mappy
         m[target_attribute] = extract_attribute_for(source, source_method)
         m
       end
-      target_builder.call(attributes)
+      target_builder.new(attributes)
     end
 
     protected

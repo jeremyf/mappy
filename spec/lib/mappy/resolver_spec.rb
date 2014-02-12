@@ -5,7 +5,7 @@ module Mappy
   describe Resolver do
     let(:source_publisher) { lambda {|source| source.publishers.join("; ")}}
     let(:source) { double('Source', title: 'A Title', publishers: ["John", "Ringo"]) }
-    let(:target_builder) { lambda {|attrs| OpenStruct.new(attrs) } }
+    let(:target_builder) { OpenStruct }
     let(:legend) {
       [
         [:title, :title],

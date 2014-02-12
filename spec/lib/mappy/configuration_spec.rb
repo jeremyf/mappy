@@ -17,7 +17,7 @@ module Mappy
     context '#map' do
       let(:source_type) {:article}
       let(:article) { double('Article', title: 'Hello', to_mappy_type: source_type) }
-      let(:target_builder) { OpenStruct.method(:new)}
+      let(:target_builder) { OpenStruct }
       let(:target_type) { :document }
       let(:target_builder_finder) { double("Finder") }
 
