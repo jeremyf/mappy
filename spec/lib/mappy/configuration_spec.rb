@@ -17,11 +17,17 @@ module Mappy
     context '#map' do
       let(:source_type) {:article}
       let(:article) { double('Article', title: 'Hello', to_mappy_type: source_type) }
+      let(:target_builder) { OpenStruct.method(:new)}
+      let(:target_type) { :document }
+      let(:target_builder_finder) { double("Finder") }
+
       before(:each) do
-        subject.legend(source: source_type, target: :document, legend: legend)
+        subject.legend(source: source_type, target: target_type, legend: legend)
       end
       it 'should yield a map storage' do
-        document = subject.map(article, target: :document)
+        target_builder_finder.should_receive(:call).with(target_type).and_return(target_builder)
+
+        document = subject.map(article, target: target_type, target_builder_finder: target_builder_finder)
         expect(document.title).to eq(article.title)
       end
     end
