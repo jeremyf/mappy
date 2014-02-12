@@ -25,14 +25,14 @@ module Mappy
     # The Rails load sequence means that some of the configured Targets may
     # not be loaded; As such I am not calling configure! instead relying on
     # Mappy::Railtie to handle the configure! call
-    configure! unless defined?(Rails)
+    finalize! unless defined?(Rails)
   end
 
   def map(source, options = {})
     configuration.map(source, options)
   end
 
-  def configure!
+  def finalize!
     if @configuration_block.respond_to?(:call)
       self.configuration ||= Configuration.new
       @configuration_block.call(configuration)
