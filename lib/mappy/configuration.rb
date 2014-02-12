@@ -1,3 +1,6 @@
+require "mappy/resolver"
+require "mappy/target_builder_factory"
+
 module Mappy
 
   class Configuration
@@ -18,7 +21,7 @@ module Mappy
     def map(source_instance, options = {})
       source = source_instance.to_mappy_type
       target = options.fetch(:target)
-      target_builder_finder = options.fetch(:target_builder_finder) { lambda {|t| OpenStruct }}
+      target_builder_finder = options.fetch(:target_builder_finder) { Mappy::TargetBuilderFactory }
       legend = map_store.fetch(target).fetch(source)
 
       target_builder = target_builder_finder.call(target)

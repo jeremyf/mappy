@@ -7,6 +7,11 @@ module Mappy
   # Responsible for taking a symbol, finding the appropriate class then
   # verifying that the class is "well formed."
   class TargetBuilderFactory
+
+    def self.call(*args)
+      new.call(*args)
+    end
+
     def call(target_symbol)
       target_builder = extract_target_builder(target_symbol)
       validate!(target_builder)
@@ -20,9 +25,6 @@ module Mappy
 
     def validate!(target_builder)
       target_instance = target_builder.allocate
-      if ! target_instance.respond_to?(:attributes=)
-        raise InvalidTargetBuilder.new("Expected an instance of #{target_builder} to have #attributes= method")
-      end
 
       begin
         target_instance.send(:initialize, {})

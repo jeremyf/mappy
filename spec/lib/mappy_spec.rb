@@ -1,4 +1,5 @@
 require File.expand_path('../../../lib/mappy', __FILE__)
+require File.expand_path('../model_support', __FILE__)
 
 describe Mappy do
   context '.to_type' do
@@ -14,7 +15,7 @@ describe Mappy do
       Mappy.configure do |config|
         config.legend(
           source: :journal,
-          target: 'orcid/work',
+          target: 'mappy/mock_valid_model',
           legend: [
             [:title, :title],
             [lambda{|*|'long-journal'}, :work_type],
@@ -27,11 +28,8 @@ describe Mappy do
     end
 
     let(:title) { 'A Rocking Title' }
-    let(:journal) {
-      double('Journal', to_mappy_type: :journal, title: title)
-    }
-
-    subject { Mappy.map(journal, target: 'orcid/work') }
+    let(:journal) { double('Journal', to_mappy_type: :journal, title: title) }
+    subject { Mappy.map(journal, target: 'mappy/mock_valid_model') }
 
     its(:work_type) { should eq('long-journal')}
     its(:title) { should eq(title) }
