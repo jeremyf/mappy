@@ -19,6 +19,11 @@ module Mappy
       source = source_instance.to_mappy_type
       target = options.fetch(:target)
       legend = map_store.fetch(target).fetch(source)
+
+      Resolver.new(
+        target_builder: OpenStruct.method(:new),
+        legend: legend
+      ).call(source_instance)
     end
   end
 

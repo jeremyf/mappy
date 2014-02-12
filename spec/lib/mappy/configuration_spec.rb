@@ -16,7 +16,7 @@ module Mappy
 
     context '#map' do
       let(:source_type) {:article}
-      let(:article) { double('Article', to_mappy_type: source_type) }
+      let(:article) { double('Article', title: 'Hello', to_mappy_type: source_type) }
       before(:each) do
         subject.legend(source: source_type, target: :document, legend: legend)
       end

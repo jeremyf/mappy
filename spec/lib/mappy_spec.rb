@@ -17,7 +17,7 @@ describe Mappy do
           target: 'orcid/work',
           legend: [
             [:title, :title],
-            [lambda{|*|'long-journal'}, :work_type]
+            [lambda{|*|'long-journal'}, :work_type],
           ]
         )
       end
@@ -27,15 +27,14 @@ describe Mappy do
     end
 
     let(:title) { 'A Rocking Title' }
-    let(:contributors) { ["John", "Paul", "Ringo", "George"] }
     let(:journal) {
-      double('Journal', to_mappy_type: :journal, title: title, contributors: contributors)
+      double('Journal', to_mappy_type: :journal, title: title)
     }
 
-    subject { Mappy.map(journal, to: 'orcid/work') }
+    subject { Mappy.map(journal, target: 'orcid/work') }
 
     its(:work_type) { should eq('long-journal')}
-    its(:title) { should title }
-    its(:contributor) { should eq contributors.join("; ") }
+    its(:title) { should eq(title) }
+
   end
 end

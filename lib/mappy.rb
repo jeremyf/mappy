@@ -39,4 +39,8 @@ module Mappy
     end
   end
 
+  def reset!
+    self.configuration = Configuration.new
+  end
+
 end
