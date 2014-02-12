@@ -12,12 +12,9 @@ describe Mappy do
   context '.map' do
     before(:each) do
       Mappy.configure do |config|
-        config.to_target(:append_work) do |target|
-          target.from_source(:journal) do |map|
-            map.title :title
-            map.work_type 'long-journal'
-            map.contributor lambda {|journal| journal.contributors.join("; ") }
-          end
+        config.legend(source: :journal, target: 'orcid/work') do
+          title :title
+          work_type 'long-journal'
         end
       end
     end
@@ -27,13 +24,12 @@ describe Mappy do
 
     let(:title) { 'A Rocking Title' }
     let(:contributors) { ["John", "Paul", "Ringo", "George"] }
-    let(:journal) { double('Journal', to_mappy_type: :journal, title: title, contributors: contributors)}
+    let(:journal) {
+      double('Journal', to_mappy_type: :journal, title: title, contributors: contributors)
+    }
 
-    subject { Mappy.map(journal, to: :append_work) }
+    subject { Mappy.map(journal, to: 'orcid/work') }
 
-    its(:to_mappy_type) { should eq(:append_work) }
-    its(:from_mappy_type) { should eq(:journal) }
-    its(:from_mappy_source) { should eq(journal) }
     its(:work_type) { should eq('long-journal')}
     its(:title) { should title }
     its(:contributor) { should eq contributors.join("; ") }

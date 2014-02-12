@@ -1,5 +1,4 @@
 require "mappy/version"
-require "mappy/configuration"
 
 module Mappy
   class << self

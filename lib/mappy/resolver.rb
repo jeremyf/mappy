@@ -16,7 +16,9 @@ module Mappy
       end
       target_builder.call(attributes)
     end
+
     protected
+
     def extract_attribute_for(source, method_name_or_proc)
       if method_name_or_proc.respond_to?(:call)
         method_name_or_proc.call(source)

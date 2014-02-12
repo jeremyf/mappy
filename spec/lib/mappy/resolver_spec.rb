@@ -13,7 +13,6 @@ module Mappy
       ]
     }
 
-
     context '#call' do
       let(:resolved_publisher) { source_publisher.call(source) }
       subject { described_class.new(target_builder: target_builder, legend: legend).call(source) }
