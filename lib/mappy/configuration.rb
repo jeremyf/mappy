@@ -20,6 +20,8 @@ module Mappy
       target = options.fetch(:target)
       legend = map_store.fetch(target).fetch(source)
 
+      # @Todo: The returned value should not be an OpenStruct, but should
+      # be an instance of the target (as per some Mappy resolver).
       Resolver.new(
         target_builder: OpenStruct.method(:new),
         legend: legend
