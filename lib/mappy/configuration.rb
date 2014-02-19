@@ -37,7 +37,7 @@ module Mappy
     end
 
     def extract_source_type(source_instance)
-      source_instance.to_mappy_type
+      Mappy.to_type(source_instance)
     end
   end
 
