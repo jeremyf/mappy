@@ -22,8 +22,8 @@ module Mappy
       target = options.fetch(:target)
       target_builder_finder = options.fetch(:target_builder_finder) { Mappy::TargetBuilderFactory }
 
-      source = source_instance.to_mappy_type
-      legend = map_store.fetch(target).fetch(source)
+      source_type = extract_source_type(source_instance)
+      legend = extract_legend(target, source_type)
       target_builder = target_builder_finder.call(target)
 
       resolve(source_instance, target_builder, legend)
@@ -34,6 +34,14 @@ module Mappy
         target_builder: target_builder,
         legend: legend
       ).call(source_instance)
+    end
+
+    def extract_legend(target, source_type)
+      map_store.fetch(target).fetch(source_type)
+    end
+
+    def extract_source_type(source_instance)
+      source_instance.to_mappy_type
     end
   end
 
