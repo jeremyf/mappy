@@ -9,15 +9,23 @@ module Mappy
     end
 
     def call(source)
-      attributes = {}
-      legend.each_with_object(attributes) do |(source_method, target_attribute), m|
-        m[target_attribute] = extract_attribute_for(source, source_method)
-        m
-      end
-      target_builder.new(attributes)
+      return source if source.is_a?(target_builder)
+      attributes = extract_target_attributes_from(source)
+      instantiate_target(attributes)
     end
 
     protected
+
+    def extract_target_attributes_from(source)
+      legend.each_with_object({}) do |(source_method, target_attribute), m|
+        m[target_attribute] = extract_attribute_for(source, source_method)
+        m
+      end
+    end
+
+    def instantiate_target(attributes)
+      target_builder.new(attributes)
+    end
 
     def extract_attribute_for(source, method_name_or_proc)
       if method_name_or_proc.respond_to?(:call)
