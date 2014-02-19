@@ -29,10 +29,13 @@ describe Mappy do
 
     let(:title) { 'A Rocking Title' }
     let(:journal) { double('Journal', to_mappy_type: :journal, title: title) }
-    subject { Mappy.map(journal, target: 'mappy/mock_valid_model') }
 
-    its(:work_type) { should eq('long-journal')}
-    its(:title) { should eq(title) }
+    context 'with a full source to target map' do
+      subject { Mappy.map(journal, target: 'mappy/mock_valid_model') }
+
+      its(:work_type) { should eq('long-journal')}
+      its(:title) { should eq(title) }
+    end
 
   end
 end

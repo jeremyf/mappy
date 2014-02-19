@@ -2,7 +2,7 @@ require File.expand_path('../../../../lib/mappy/configuration', __FILE__)
 
 module Mappy
   describe Configuration do
-    let(:map_store) { {} }
+    let(:map_store) { Mappy::MapStore.new }
     let(:legend) { [[:title, :title]] }
 
     subject { described_class.new(map_store: map_store) }
@@ -10,7 +10,7 @@ module Mappy
     context '#legend' do
       it 'should yield a map storage' do
         subject.legend(source: :article, target: :document, legend: legend)
-        expect(map_store.fetch(:document).fetch(:article)).to eq(legend)
+        expect(map_store.read(source: :article, target: :document)).to eq(legend)
       end
     end
 

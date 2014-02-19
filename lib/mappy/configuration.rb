@@ -1,21 +1,17 @@
 require "mappy/resolver"
 require "mappy/target_builder_factory"
+require "mappy/map_store"
 
 module Mappy
 
   class Configuration
     attr_reader :map_store
     def initialize(config = {})
-      @map_store = config.fetch(:map_store) { {} }
+      @map_store = config.fetch(:map_store) { Mappy::MapStore.new }
     end
 
     def legend(options = {})
-      source = options.fetch(:source)
-      target = options.fetch(:target)
-      legend = options.fetch(:legend)
-
-      map_store[target] ||= {}
-      map_store[target][source] = legend
+      map_store.write(options)
     end
 
     def map(source_instance, options = {})
@@ -37,7 +33,7 @@ module Mappy
     end
 
     def extract_legend(target, source_type)
-      map_store.fetch(target).fetch(source_type)
+      map_store.read(source: source_type, target: target)
     end
 
     def extract_source_type(source_instance)
