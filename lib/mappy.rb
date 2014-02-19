@@ -10,6 +10,7 @@ module Mappy
 
   def to_type(object)
     return object.to_mappy_type if object.respond_to?(:to_mappy_type)
+    object.class.to_s.underscore
   end
 
   # Used for configuring available RemoteService and any additional

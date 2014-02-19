@@ -11,4 +11,6 @@ module Mappy
   class MockInvalidModel
   end
 
+  class WithoutExplicitMappyType
+  end
 end

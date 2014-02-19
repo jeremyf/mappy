@@ -3,11 +3,17 @@ require File.expand_path('../model_support', __FILE__)
 
 describe Mappy do
   context '.to_type' do
-    let(:mappy_type) { 'hello-world' }
-    let(:object) { double(to_mappy_type: mappy_type)}
+
     it 'with explicit to mappy type' do
-      expect(Mappy.to_type(object)).to eq(mappy_type)
+      object = double(to_mappy_type: 'hello-world')
+      expect(Mappy.to_type(object)).to eq('hello-world')
     end
+
+    it 'without explicit to mappy type' do
+      object = Mappy::WithoutExplicitMappyType.new
+      expect(Mappy.to_type(object)).to eq('mappy/without_explicit_mappy_type')
+    end
+
   end
 
   context '.map' do
