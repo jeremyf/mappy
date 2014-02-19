@@ -3,7 +3,7 @@ require "mappy/configuration"
 
 module Mappy
   class << self
-    attr_accessor :configuration
+    attr_writer :configuration
   end
 
   module_function
@@ -33,9 +33,12 @@ module Mappy
     configuration.map(source, options)
   end
 
+  def configuration
+    @configuration ||= Configuration.new
+  end
+
   def finalize!
     if @configuration_block.respond_to?(:call)
-      self.configuration ||= Configuration.new
       @configuration_block.call(configuration)
     end
   end
