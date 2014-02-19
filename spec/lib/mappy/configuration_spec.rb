@@ -30,6 +30,13 @@ module Mappy
         document = subject.map(article, target: target_type, target_builder_finder: target_builder_finder)
         expect(document.title).to eq(article.title)
       end
+
+      it 'should return the source if source is already of target type' do
+        source = target_builder.new(title: 'Hello')
+        target_builder_finder.should_receive(:call).with(target_type).and_return(target_builder)
+        document = subject.map(source, target: target_type, target_builder_finder: target_builder_finder)
+        expect(document).to eq(source)
+      end
     end
   end
 end

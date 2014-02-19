@@ -17,10 +17,12 @@ module Mappy
     def map(source_instance, options = {})
       target = options.fetch(:target)
       target_builder_finder = options.fetch(:target_builder_finder) { Mappy::TargetBuilderFactory }
+      target_builder = target_builder_finder.call(target)
+
+      return source_instance if source_instance.is_a?(target_builder)
 
       source_type = extract_source_type(source_instance)
       legend = extract_legend(target, source_type)
-      target_builder = target_builder_finder.call(target)
 
       resolve(source_instance, target_builder, legend)
     end
