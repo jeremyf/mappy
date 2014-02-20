@@ -3,6 +3,55 @@
 Map one object to another. Apsiring to be a DSL for mapping one object's "data
 structure" onto another object's "data structure".
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'mappy'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install mappy
+
+## Usage
+
+You can certainly read the documentation. In particular the [Mappy module](lib/mappy.rb).
+But if you are like me, you won't trust the documentation.
+Instead I would recommend reading the specs, especially [mappy_spec](spec/mappy_spec.rb)
+
+### TL;DR
+
+```ruby
+  class Book
+    attr_accessor :name
+    def initialize(attributes = {})
+      attributes.each {|key, value| send("#{key}=", value) if respond_to?("#{key}=") }
+    end
+  end
+
+  class Orcid::Work
+    attr_accessor :title
+    def initialize(attributes = {})
+      attributes.each {|key, value| send("#{key}=", value) if respond_to?("#{key}=") }
+    end
+  end
+
+  Mappy.configure do |config|
+    config.register(source: 'book', target: 'orcid/work', legend: [:name, :title])
+  end
+
+  book = Book.new(title: 'Hello World')
+  orcid_work = Mappy.map(book, target: 'orcid/work')
+
+  assert_equal orcid_work.title, book.name
+```
+
+
+
 ## Why?
 
 Because I have discovered that I am regularly working with a heterogenious set of
@@ -17,17 +66,3 @@ with a #to_orcid_profile_attributes method.
 Or I want to create a DOI for my Article.
 
 In essence, Mappy provides a configurable seam in an application.
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'mappy'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mappy
