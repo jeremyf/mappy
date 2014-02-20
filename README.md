@@ -50,8 +50,6 @@ Instead I would recommend reading the specs, especially [mappy_spec](spec/mappy_
   assert_equal orcid_work.title, book.name
 ```
 
-
-
 ## Why?
 
 Because I have discovered that I am regularly working with a heterogenious set of
@@ -60,9 +58,9 @@ expected data structure. And there are quite a few services.
 
 That is to say, I'm attempting to submit a work to my Orcid Profile. I need some
 method for defining how to map my home grown "Article" object to the attributes
-that are needed for an Orcide work. And I don't want to infect my Article class
-with a #to_orcid_profile_attributes method.
+that are needed for a work in my Orcid Profile. And I don't want to infect my Article class
+with a #to_orcid_profile method.
 
-Or I want to create a DOI for my Article.
+Or perhaps I want to create a DOI for my Article. To successfully mint a DOI request, I need to have a valid payload. But what are the odds my Article can be passed directly to the DOI minting service.
 
-In essence, Mappy provides a configurable seam in an application.
+In essence, Mappy provides a configurable converter for an application.
