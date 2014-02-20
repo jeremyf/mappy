@@ -26,7 +26,7 @@ module Mappy
   #
   # @example
   #   Mappy.configure do |config|
-  #     config.register(source: 'book', target: 'orcid/work', legend: [:name, :title])
+  #     config.register(source: 'book', target: 'orcid/work', legend: [[:name, :title]])
   #   end
   #
   # @yieldparam config [Configuration]

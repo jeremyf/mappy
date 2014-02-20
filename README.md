@@ -26,27 +26,35 @@ Instead I would recommend reading the specs, especially [mappy_spec](spec/mappy_
 
 ```ruby
   class Book
-    attr_accessor :name
+    attr_accessor :name, :authors
     def initialize(attributes = {})
       attributes.each {|key, value| send("#{key}=", value) if respond_to?("#{key}=") }
     end
   end
 
   class Orcid::Work
-    attr_accessor :title
+    attr_accessor :title, :author
     def initialize(attributes = {})
       attributes.each {|key, value| send("#{key}=", value) if respond_to?("#{key}=") }
     end
   end
 
   Mappy.configure do |config|
-    config.register(source: 'book', target: 'orcid/work', legend: [:name, :title])
+    config.register(
+      source: 'book',
+      target: 'orcid/work',
+      legend: [
+        [:name, :title]
+        [lambda{|book| book.authors.first}, :author]
+      ]
+    )
   end
 
-  book = Book.new(title: 'Hello World')
+  book = Book.new(title: 'Hello World', authors: ["George", "Paul", "John", "Ringo"])
   orcid_work = Mappy.map(book, target: 'orcid/work')
 
   assert_equal orcid_work.title, book.name
+  assert_equal orcid_work.author, "George"
 ```
 
 ## Why?
