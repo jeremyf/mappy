@@ -7,9 +7,9 @@ module Mappy
 
     subject { described_class.new(map_store: map_store) }
 
-    context '#legend' do
+    context '#register' do
       it 'should yield a map storage' do
-        subject.legend(source: :article, target: :document, legend: legend)
+        subject.register(source: :article, target: :document, legend: legend)
         expect(map_store.read(source: :article, target: :document)).to eq(legend)
       end
     end
@@ -22,7 +22,7 @@ module Mappy
       let(:target_builder_finder) { double("Finder") }
 
       before(:each) do
-        subject.legend(source: source_type, target: target_type, legend: legend)
+        subject.register(source: source_type, target: target_type, legend: legend)
       end
       it 'should yield a map storage' do
         target_builder_finder.should_receive(:call).with(target_type).and_return(target_builder)

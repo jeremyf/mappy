@@ -10,7 +10,7 @@ module Mappy
       @map_store = config.fetch(:map_store) { Mappy::MapStore.new }
     end
 
-    def legend(options = {})
+    def register(options = {})
       map_store.write(options)
     end
 

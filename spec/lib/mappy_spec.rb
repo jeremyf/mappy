@@ -19,7 +19,7 @@ describe Mappy do
   context '.map' do
     before(:each) do
       Mappy.configure do |config|
-        config.legend(
+        config.register(
           source: :journal,
           target: 'mappy/mock_valid_model',
           legend: [
