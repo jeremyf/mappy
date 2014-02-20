@@ -1,8 +1,7 @@
 require 'active_support/inflector'
+require File.expand_path('../exceptions', __FILE__)
 
 module Mappy
-  class InvalidTargetBuilder < RuntimeError
-  end
 
   # Responsible for taking a symbol, finding the appropriate class then
   # verifying that the class is "well formed."
