@@ -7,7 +7,7 @@ module Mappy
   class Configuration
     attr_reader :map_store
     def initialize(config = {})
-      @map_store = config.fetch(:map_store) { Mappy::MapStore.new }
+      @map_store = config.fetch(:map_store) { MapStore.new }
     end
 
     def register(options = {})
@@ -16,7 +16,7 @@ module Mappy
 
     def map(source_instance, options = {})
       target = options.fetch(:target)
-      target_builder_finder = options.fetch(:target_builder_finder) { Mappy::TargetBuilderFactory }
+      target_builder_finder = options.fetch(:target_builder_finder) { TargetBuilderFactory }
       target_builder = target_builder_finder.call(target)
 
       return source_instance if source_instance.is_a?(target_builder)
@@ -43,4 +43,5 @@ module Mappy
     end
   end
 
+  private_constant :Configuration
 end

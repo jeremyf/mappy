@@ -2,12 +2,14 @@ require File.expand_path('../../../../lib/mappy/configuration', __FILE__)
 
 module Mappy
   describe Configuration do
-    let(:map_store) { Mappy::MapStore.new }
+    let(:map_store) { MapStore.new }
     let(:legend) { [[:title, :title]] }
 
     subject { described_class.new(map_store: map_store) }
 
     context '#register' do
+      before(:each) do
+      end
       it 'should yield a map storage' do
         subject.register(source: :article, target: :document, legend: legend)
         expect(map_store.read(source: :article, target: :document)).to eq(legend)

@@ -35,4 +35,6 @@ module Mappy
       end
     end
   end
+
+  private_constant :Resolver
 end

@@ -26,4 +26,6 @@ module Mappy
     end
 
   end
+
+  private_constant :MapStore
 end
