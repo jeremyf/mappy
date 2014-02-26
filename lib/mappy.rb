@@ -56,10 +56,6 @@ module Mappy
     configuration.map(source, options)
   end
 
-  # @deprecated
-  def finalize!
-  end
-
   # Because sometimes, when you are testing things, you might want a new
   # configuration.
   # :nodoc:
