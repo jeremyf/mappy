@@ -71,3 +71,8 @@ with a #to_orcid_profile method.
 Or perhaps I want to create a DOI for my Article. To successfully mint a DOI request, I need to have a valid payload. But what are the odds my Article can be passed directly to the DOI minting service.
 
 In essence, Mappy provides a configurable converter for an application.
+
+## TODO
+
+Perhaps there is a DSL to be found in this.
+Maybe I should look to [Lotus::Model::Mapper](https://github.com/lotus/model/blob/master/lib/lotus/model/mapper.rb) and its corresponding Coercer and Collection.
