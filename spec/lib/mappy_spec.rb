@@ -1,4 +1,5 @@
-require File.expand_path('../../../lib/mappy', __FILE__)
+require 'spec_helper'
+require 'mappy'
 require File.expand_path('../model_support', __FILE__)
 
 describe Mappy do

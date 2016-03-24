@@ -1,4 +1,5 @@
-require File.expand_path('../../../../lib/mappy/map_store', __FILE__)
+require 'spec_helper'
+require 'mappy/map_store'
 
 module Mappy
   describe MapStore do

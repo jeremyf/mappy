@@ -1,4 +1,5 @@
-require File.expand_path('../../../../lib/mappy/configuration', __FILE__)
+require 'spec_helper'
+require 'mappy/configuration'
 
 module Mappy
   describe Configuration do

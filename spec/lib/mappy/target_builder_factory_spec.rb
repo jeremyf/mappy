@@ -1,4 +1,5 @@
-require File.expand_path('../../../../lib/mappy/target_builder_factory', __FILE__)
+require 'spec_helper'
+require 'mappy/target_builder_factory'
 require File.expand_path('../../model_support', __FILE__)
 
 module Mappy
