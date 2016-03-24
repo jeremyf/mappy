@@ -11,9 +11,7 @@ RSpec::Core::RakeTask.new
 
 namespace :spec do
   desc "Run rspec and generate code coverage"
-  RSpec::Core::RakeTask.new(:coverage) do |t|
-    t.ruby_opts = "-r spec/spec_helper"
-  end
+  RSpec::Core::RakeTask.new(:coverage)
 end
 
 task :default => ['spec:coverage', 'yard']

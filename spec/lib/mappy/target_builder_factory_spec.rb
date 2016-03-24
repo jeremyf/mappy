@@ -19,7 +19,7 @@ module Mappy
       it 'raises an exception when the builder does not have attributes' do
         expect {
           subject.call('mappy/mock_invalid_model')
-        }.to raise_error
+        }.to raise_error(Mappy::InvalidTargetBuilder)
       end
 
     end

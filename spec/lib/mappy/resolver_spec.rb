@@ -1,4 +1,5 @@
-require File.expand_path('../../../../lib/mappy/resolver', __FILE__)
+require 'spec_helper'
+require 'mappy/resolver'
 require 'ostruct'
 
 module Mappy
